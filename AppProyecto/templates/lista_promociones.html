@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Promociones</title>
+</head>
+<body>
+    <ul>
+        
+        {% for promociones in lista_promociones  %}
+        <li>
+            {{promociones.nombre}} {{promociones.descripcion}} ${{promociones.precio}}
+        </li>
+            
+        {% endfor %}
+            
+
+
+    </ul>
+    
+</body>
+</html>
