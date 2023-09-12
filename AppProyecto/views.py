@@ -61,3 +61,29 @@ def lista_promociones(req):
     return render(req, "lista_promociones.html", {"lista_promociones": lista})
 
 
+
+#Vistas
+
+def inicio(req):
+
+    return render(req, "inicio.html")
+
+def pasteleria(req):
+
+    return render(req, "pasteleria.html")
+
+def cocina(req):
+
+    return render(req, "cocina.html")
+
+def promociones(req):
+
+    return render(req, "promociones.html")
+
+def inicio_de_sesion(req):
+
+    return render(req, "iniciar_sesion.html")
+
+
+
+
