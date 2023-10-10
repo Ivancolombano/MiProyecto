@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+
+{% block contenido  %}
+    <form action="{% url 'Registrar' %}" method="post"> {% csrf_token %}
+
+        {{miFormulario.as_p}}   
+
+  
+     <button type="submit"> Crear usuario </button>
+    </form>
+
+     
+
+{% endblock contenido %}

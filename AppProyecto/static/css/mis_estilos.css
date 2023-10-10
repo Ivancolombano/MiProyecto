@@ -1,0 +1,41 @@
+.home-button{
+    padding-right:  150px;
+
+}
+
+.lista-pasteleria{
+    
+        margin: 20px;
+        grid-template-columns: 1fr 1fr 1fr;
+        display: grid;
+        row-gap: 30px;
+        justify-content: start;
+        justify-items: center;
+    
+}
+
+
+
+
+.lista-cocina{
+    
+        margin: 20px;
+        grid-template-columns: 1fr 1fr 1fr;
+        display: grid;
+        row-gap: 30px;
+        justify-content: start;
+        justify-items: center;
+    
+}
+
+
+.lista-promociones{
+    
+    margin: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+    display: grid;
+    row-gap: 30px;
+    justify-content: start;
+    justify-items: center;
+
+}

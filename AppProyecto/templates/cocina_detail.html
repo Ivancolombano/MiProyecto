@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+
+{% block contenido  %}
+
+
+  <h1>Detalle del pedido</h1>  
+
+  <h4>Cocina: {{listado.nombre}}</h4>
+  <h4>Descripcion: {{listado.descripcion}}</h4>
+  <h4>Precio: ${{listado.precio}}</h4>
+  <h4>Creado: {{listado.creado}}</h4>
+
+    
+{% endblock contenido %}  

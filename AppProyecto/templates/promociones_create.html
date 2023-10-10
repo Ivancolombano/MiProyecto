@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+
+{% block contenido  %}
+    <form action="{% url 'CreaPromociones' %}" method="post"> {% csrf_token %}
+
+        {{form.as_p}}   
+
+  
+     <button type="submit"> Enviar </button>
+    </form>
+
+     
+
+{% endblock contenido %}
