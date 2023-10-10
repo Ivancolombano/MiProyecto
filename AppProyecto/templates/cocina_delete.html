@@ -1,0 +1,15 @@
+{% extends 'padre.html' %}
+
+{% block contenido  %}
+    <form action="{% url 'EliminaCocina' listado.id %}" method="post"> {% csrf_token %}
+
+        <p>Desea eliminar?</p>   
+
+  
+     <button type="submit"> Confirmar </button>
+     <button><a href="{% url 'Inicio' %}"> Cancelar </a></button>
+    </form>
+
+     
+
+{% endblock contenido %}

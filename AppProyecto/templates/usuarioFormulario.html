@@ -1,0 +1,17 @@
+{% extends 'padre.html' %}
+
+{% block contenido  %}
+    <form action="{% url 'CreaUsuario' %}" method="post"> {% csrf_token %}
+
+        {{miFormulario.as_p}} 
+        {{userForm.as_p}}  
+
+  
+     <button type="submit">Enviar </button>
+    
+     
+    </form>
+
+     
+
+{% endblock contenido %}

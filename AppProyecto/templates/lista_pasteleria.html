@@ -1,23 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de Pastelería</title>
-</head>
-<body>
-    <ul>
-        
-        {% for pasteleria in lista_pasteleria  %}
-        <li>
-            {{pasteleria.nombre}} {{pasteleria.descripcion}} ${{pasteleria.precio}}
-        </li>
-            
-        {% endfor %}
-            
+{% extends 'padre.html' %}
+
+{% block contenido  %}
+     <h5>Elegí tu pedido de pasteleria!</h5>
 
 
-    </ul>
+  
+     
     
-</body>
-</html>
+    <section  class="lista-pasteleria">
+      {% for pasteleria in lista_pasteleria  %}
+          <div class="card" style="width: 18rem;">
+            <img src="https://th.bing.com/th/id/OIP.a2KZcoYPmmUPgg6_6yigtgHaE8?w=278&h=185&c=7&r=0&o=5&dpr=1.3&pid=1.7" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">{{pasteleria.nombre}}  ${{pasteleria.precio}}</h5>
+            <p class="card-text">{{pasteleria.descripcion}}.</p>
+            <a href="{% url 'PedidoPasteleria' %}" class="btn btn-primary"> Pedir! </a>
+          </div>
+          </div>
+          
+            
+      {% endfor %}
+   </section>
+
+    
+    
+    
+{% endblock contenido %}  

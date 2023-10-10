@@ -1,0 +1,21 @@
+{% extends 'padre.html' %}
+
+{% block contenido  %}
+  
+
+        <p>Resultados de búsqueda</p>  
+
+        {% if precios %}
+
+          <ul>
+                {% for precio in precios  %}
+                       <li>{{precio}}</li>
+                {% endfor %}
+          </ul>
+        {% else %}
+              <h5>No hay publicaciones que coincidan con tu búsqueda</h5>
+                
+        {% endif %}
+
+
+{% endblock contenido %}

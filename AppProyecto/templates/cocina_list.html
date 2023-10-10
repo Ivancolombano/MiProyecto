@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+
+{% block contenido  %}
+    <ul>
+        
+        {% for listado in cocina  %}
+         <li>
+             <a href="{% url 'DetalleCocina' listado.id %}"> {{listado}} </a>          
+         </li>
+          <div style="display: flex; column-gap: 5px;">
+            <button>
+              <a href="{% url 'EliminaCocina' listado.id %}"> Eliminar </a>
+         </button>
+            <button>
+                 <a href="{% url 'ActualizarCocina' listado.id %}"> Editar </a>
+            </button>
+            
+          </div>
+            
+        {% endfor %}
+    </ul>
+    
+    
+    
+{% endblock contenido %}  

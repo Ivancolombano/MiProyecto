@@ -1,0 +1,14 @@
+{% extends 'padre.html' %}
+
+{% block contenido  %}
+    <form action="{% url 'cocinaFormulario' %}" method="post"> {% csrf_token %}
+
+        {{miFormulario.as_p}}   
+
+  
+     <button type="submit">Enviar </button>
+    </form>
+
+     
+
+{% endblock contenido %}
