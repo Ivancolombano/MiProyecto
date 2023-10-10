@@ -558,4 +558,12 @@ def nosotros(req):
 
 def contacto(req):
 
+<<<<<<< HEAD
     return render(req, "contacto.html")    
+=======
+    return render(req, "contacto.html")    
+
+
+
+ 
+>>>>>>> 44ae5613889e82e8a98afa7939b006d78a5c962a
