@@ -5,8 +5,10 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView, UpdateView, CreateView
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from .models import Pasteleria, Cocina, Promociones, Avatar, Usuario, Pedido
 from .forms import Pasteleriaformulario, Cocinaformulario, Promocionesformulario, UserEditForm, AvatarFormulario, UsuarioFormulario, PedidoCocinaFormulario, PedidoPasteleriaFormulario, PedidoPromocionesFormulario
@@ -99,7 +101,8 @@ def inicio_de_sesion(req):
 
 #Formularios
 
-@login_required
+
+@staff_member_required(login_url='/app-proyecto/login')
 def pasteleriaFormulario(req):
 
     print('method', req.method)
@@ -121,9 +124,9 @@ def pasteleriaFormulario(req):
         miFormulario = Pasteleriaformulario()
         return render(req, "pasteleriaFormulario.html", {"miFormulario": miFormulario})
     
-
     
-@login_required
+
+@staff_member_required(login_url='/app-proyecto/login')
 def cocinaFormulario(req):
 
     print('method', req.method)
@@ -147,7 +150,7 @@ def cocinaFormulario(req):
      
 
 
-@login_required    
+@staff_member_required(login_url='/app-proyecto/login')    
 def promocionesFormulario(req):
 
     print('method', req.method)
@@ -224,10 +227,17 @@ def buscar_promociones(req: HttpRequest):
 
 
 
-class PasteleriaList(LoginRequiredMixin, ListView):
+class PasteleriaList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Pasteleria
     template_name = "pasteleria_list.html"
     context_object_name = "pasteleria"
+
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
 
 
 
@@ -237,34 +247,68 @@ class PasteleriaDetail(LoginRequiredMixin, DetailView):
     context_object_name = "listado"
 
 
-class PasteleriaCreate(LoginRequiredMixin, CreateView):
+class PasteleriaCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Pasteleria
     template_name = "pasteleria_create.html"
     fields = ["nombre", "precio", "descripcion"]
     success_url = '/app-proyecto/'
+    login_url='/app-proyecto/login'
+    
+
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
 
 
-class PasteleriaUpdate(LoginRequiredMixin, UpdateView):
+
+class PasteleriaUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Pasteleria
     template_name = "pasteleria_update.html"
     fields = ('__all__')
     context_object_name = "listado"
     success_url = '/app-proyecto/listapasteleria'
+    login_url='/app-proyecto/login'
+
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
 
 
-class PasteleriaDelete(LoginRequiredMixin, DeleteView):
+class PasteleriaDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Pasteleria
     template_name = "pasteleria_delete.html"
     success_url = '/app-proyecto/listapasteleria'
     context_object_name = "listado"
+    login_url='/app-proyecto/login'
+
+
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
 
 
 
 
-class CocinaList(LoginRequiredMixin, ListView):
+class CocinaList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Cocina
     template_name = "cocina_list.html"
     context_object_name = "cocina"
+
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
 
 
 
@@ -274,36 +318,69 @@ class CocinaDetail(LoginRequiredMixin, DetailView):
     context_object_name = "listado"
 
 
-class CocinaCreate(LoginRequiredMixin, CreateView):
+class CocinaCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Cocina
     template_name = "cocina_create.html"
     fields = ["nombre", "precio", "descripcion"]
     success_url = '/app-proyecto/'
+    login_url='/app-proyecto/login'
+
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
 
 
-class CocinaUpdate(LoginRequiredMixin, UpdateView):
+class CocinaUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Cocina
     template_name = "cocina_update.html"
     fields = ('__all__')
     context_object_name = "listado"
     success_url = '/app-proyecto/listacocina'
+    login_url='/app-proyecto/login'
 
 
-class CocinaDelete(LoginRequiredMixin, DeleteView):
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
+
+
+class CocinaDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Cocina
     template_name = "cocina_delete.html"
     success_url = '/app-proyecto/listacocina'
     context_object_name = "listado"
+    login_url='/app-proyecto/login'
+
+
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
 
 
 
 
 
 
-class PromocionesList(LoginRequiredMixin, ListView):
+class PromocionesList(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Promociones
     template_name = "promociones_list.html"
     context_object_name = "promociones"
+
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
 
 
 
@@ -313,26 +390,54 @@ class PromocionesDetail(LoginRequiredMixin, DetailView):
     context_object_name = "listado"
 
 
-class PromocionesCreate(LoginRequiredMixin, CreateView):
+class PromocionesCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Promociones
     template_name = "promociones_create.html"
     fields = ["nombre", "precio", "descripcion"]
     success_url = '/app-proyecto/'
+    login_url='/app-proyecto/'
 
 
-class PromocionesUpdate(LoginRequiredMixin, UpdateView):
+    def test_func(self):
+        return self.request.user.is_staff
+    
+
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
+
+
+class PromocionesUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Promociones
     template_name = "promociones_update.html"
     fields = ('__all__')
     context_object_name = "listado"
     success_url = '/app-proyecto/listapromociones'
+    login_url='/app-proyecto/login'
 
 
-class PromocionesDelete(LoginRequiredMixin, DeleteView):
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
+
+
+class PromocionesDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Promociones
     template_name = "promociones_delete.html"
     success_url = '/app-proyecto/listapromociones'
     context_object_name = "listado"
+    login_url='/app-proyecto/login'
+
+
+    def test_func(self):       
+     return self.request.user.is_staff
+    
+    def handle_no_permission(self):
+        
+        return redirect('/app-proyecto/')
     
 
 #Login

@@ -5,11 +5,17 @@
         <a class="navbar-brand" href="{%  url 'Inicio'  %}">Inicio</a>
       </div>           
         <a class="btn btn-secondary" href="{%  url 'listadoPasteleria'  %}">Pastelería</a>
-        <a class="btn btn-quaternary" href="{%  url 'CreaPasteleria'  %}">Publicar pasteleria</a>
+        {% if user.is_staff %}
+         <a class="btn btn-quaternary" href="{%  url 'CreaPasteleria'  %}">Publicar pasteleria</a>
+        {% endif %}
         <a class="btn btn-secondary" href="{%  url 'listaCocina'  %}">Cocina</a>
-        <a class="btn btn-quaternary" href="{%  url 'CreaCocina'  %}">Publicar cocina</a>
+        {% if user.is_staff %}
+         <a class="btn btn-quaternary" href="{%  url 'CreaCocina'  %}">Publicar cocina</a>
+        {% endif %}
         <a class="btn btn-secondary" href="{%  url 'ListaPromociones'  %}">Promociones</a>
-        <a class="btn btn-quaternary" href="{%  url 'CreaPromociones'  %}">Publicar promos</a>
+        {% if user.is_staff %}
+         <a class="btn btn-quaternary" href="{%  url 'CreaPromociones'  %}">Publicar promos</a>
+        {% endif %}
         
         
 

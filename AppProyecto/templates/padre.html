@@ -49,10 +49,17 @@
                             <li class="list-inline-item">⋅</li>
                             <li class="list-inline-item"><a href="{%  url 'AgregarAvatar'  %}">Avatar</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="{%  url 'ListadoPasteleria'  %}">Editar pasteleria</a></li>
+                            {% if user.is_staff %}
+                             <li class="list-inline-item"><a href="{%  url 'ListadoPasteleria'  %}">Editar pasteleria</a></li>                                           
+                            {% endif %}                        
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="{%  url 'ListadoCocina'  %}">Editar cocina</a></li>
-                            <li class="list-inline-item">⋅</li><a href="{%  url 'ListadoPromociones'  %}">Editar promociones</a></li>
+                            {% if user.is_staff %}
+                             <li class="list-inline-item"><a href="{%  url 'ListadoCocina'  %}">Editar cocina</a></li>
+                            {% endif %}
+                            {% if user.is_staff %}
+                             <li class="list-inline-item">⋅</li><a href="{%  url 'ListadoPromociones'  %}">Editar promociones</a></li>
+                            {% endif %}
+
                         </ul>
                         <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2023. All Rights Reserved.</p>
                     </div>
